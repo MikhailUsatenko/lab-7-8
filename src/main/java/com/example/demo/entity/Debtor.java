@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +19,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
-@Table(name = "debtor", schema = "public", catalog = "test",
-		uniqueConstraints = @UniqueConstraint(columnNames = "fullName"))
+@Table(name = "debtor", schema = "public",
+		uniqueConstraints = @UniqueConstraint(columnNames = "full_name"))
 public class Debtor {
 	@Id
 	private Integer id;
@@ -29,4 +32,9 @@ public class Debtor {
 
 	@OneToMany(mappedBy="debtor")
 	private List<Debt> debtList;
+
+	public Debtor(Integer id, String fullName) {
+		this.id = id;
+		this.fullName = fullName;
+	}
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,15 +18,22 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
 public class Debt {
 	@Id
 	private Integer id;
 
 	@Column(name = "sum_of_debt")
-	private Double debtSum;
+	private Integer debtSum;
 
 	@ManyToOne
 	@JoinColumn(name="debtor_id", nullable=false)
 	private Debtor debtor;
+
+	public Debt(Integer id, Integer debtSum, Debtor debtor) {
+		this.id = id;
+		this.debtSum = debtSum;
+		this.debtor = debtor;
+	}
 }
